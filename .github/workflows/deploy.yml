@@ -23,12 +23,20 @@ jobs:
 
       - name: Build Vite app
         run: npm run build
+        env:
+          VITE_API_URL: https://trymakhana-website-backend.onrender.com
+          VITE_FIREBASE_API_KEY: AIzaSyD3hp5QEv4kWv3mksvKJsUgF7H6RwGKR7U
+          VITE_FIREBASE_AUTH_DOMAIN: makhana-magic-e6ffe.firebaseapp.com
+          VITE_FIREBASE_PROJECT_ID: makhana-magic-e6ffe
+          VITE_FIREBASE_STORAGE_BUCKET: makhana-magic-e6ffe.firebasestorage.app
+          VITE_FIREBASE_MESSAGING_SENDER_ID: 64623810448
+          VITE_FIREBASE_APP_ID: 1:64623810448:web:85b351dd6d2c1362ffc515
 
       - name: Deploy to GoDaddy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
-          server: ${{ secrets.ftp.medimapdiagnostics.com }}
-          username: ${{ secrets.development }}
-          password: ${{ secrets.development123 }}
+          server:  ftp.medimapdiagnostics.com
+          username: development@trymaakhanastores.com
+          password: development123
           local-dir: ./dist/
-          server-dir: /public_html/
+          server-dir: /public_html/trymaakhanastores.com/
