@@ -38,6 +38,6 @@ jobs:
           server: ftp.medimapdiagnostics.com
           username: development@trymaakhanastore.com
           password: development123
-          protocol: sftp
+          protocol: ftps
           local-dir: ./dist/
           server-dir: /public_html/trymaakhanastore.com/
