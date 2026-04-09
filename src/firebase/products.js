@@ -1,48 +1,22 @@
-// src/firebase/products.js
-import {
-  collection, getDocs, addDoc, updateDoc,
-  deleteDoc, doc, query, orderBy,
-} from 'firebase/firestore'
-import { db } from './config'
-
-const COL = 'products'
+// src/firebase/products.js — now uses backend API (MySQL)
+import { fetchProductsPublicAPI, fetchProductsAPI, saveProductAPI, deleteProductAPI, toggleProductAPI } from '../api'
 
 export async function fetchPublicProductsFromFirestore() {
-  const snap = await getDocs(query(collection(db, COL), orderBy('createdAt', 'asc')))
-  return snap.docs
-    .map(d => ({ id: d.id, ...d.data() }))
-    .filter(p => p.active !== false)
+  return fetchProductsPublicAPI()
 }
 
 export async function fetchAllProductsFromFirestore() {
-  const snap = await getDocs(query(collection(db, COL), orderBy('createdAt', 'asc')))
-  return snap.docs.map(d => ({ id: d.id, ...d.data() }))
+  return fetchProductsAPI()
 }
 
 export async function saveProductToFirestore(product) {
-  const { id, ...data } = product
-  const payload = {
-    ...data,
-    active:    data.active !== false,
-    updatedAt: new Date().toISOString(),
-  }
-  if (id) {
-    await updateDoc(doc(db, COL, id), payload)
-    return { id }
-  } else {
-    payload.createdAt = new Date().toISOString()
-    const ref = await addDoc(collection(db, COL), payload)
-    return { id: ref.id }
-  }
+  return saveProductAPI(product)
 }
 
 export async function deleteProductFromFirestore(id) {
-  await deleteDoc(doc(db, COL, id))
+  return deleteProductAPI(id)
 }
 
 export async function toggleProductInFirestore(id, active) {
-  await updateDoc(doc(db, COL, id), {
-    active,
-    updatedAt: new Date().toISOString(),
-  })
+  return toggleProductAPI(id, active)
 }

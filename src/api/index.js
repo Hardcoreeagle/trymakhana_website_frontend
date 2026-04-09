@@ -113,3 +113,12 @@ export async function toggleProductAPI(id, active) {
     body: JSON.stringify({ active }),
   })
 }
+
+export async function updatePaymentStatusAPI(orderId, paymentStatus) {
+  const headers = await getAuthHeader()
+  return request(`/api/orders/${orderId}/payment`, {
+    method: 'PATCH',
+    headers,
+    body: JSON.stringify({ paymentStatus }),
+  })
+}
