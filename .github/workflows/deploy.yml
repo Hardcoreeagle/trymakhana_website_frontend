@@ -36,7 +36,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
           server: ftp.medimapdiagnostics.com
-          username: development@trymaakhanastore.com
+          username: development@trymaakhanastores.com
           password: development123
           protocol: ftps
           local-dir: ./dist/
