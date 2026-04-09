@@ -35,8 +35,8 @@ jobs:
       - name: Deploy to GoDaddy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
-          server:  ftp.medimapdiagnostics.com
-          username: development@trymaakhanastores.com
+          server: ftp.medimapdiagnostic.com
+          username: development@trymaakhanastore.com
           password: development123
           local-dir: ./dist/
-          server-dir: /public_html/trymaakhanastores.com/
+          server-dir: /public_html/trymaakhanastore.com/
