@@ -40,4 +40,4 @@ jobs:
           password: development123
           protocol: ftps
           local-dir: ./dist/
-          server-dir: /
+          server-dir: ../
