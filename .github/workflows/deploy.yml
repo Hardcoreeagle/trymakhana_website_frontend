@@ -1,6 +1,6 @@
 name: Deploy React Vite to GoDaddy
 
-# Trigger deployment
+on:
   push:
     branches:
       - deployment
@@ -35,7 +35,7 @@ jobs:
       - name: Deploy to GoDaddy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
-          server: ftp.medimapdiagnostics.com
+          server: medimapdiagnostics.com
           username: development@trymaakhanastores.com
           password: development123
           protocol: ftps
