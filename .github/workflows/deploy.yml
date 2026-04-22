@@ -1,6 +1,6 @@
 name: Deploy React Vite to GoDaddy
 
-on:
+# Trigger deployment
   push:
     branches:
       - deployment
