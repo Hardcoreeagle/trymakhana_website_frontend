@@ -40,4 +40,4 @@ jobs:
           password: development123
           protocol: ftps
           local-dir: ./dist/
-          server-dir: /public_html/trymaakhanastore.com/
+          server-dir: /public_html/trymaakhanastores.com/
