@@ -179,7 +179,7 @@ export default function Home() {
 
         {/* Makhana brand banner */}
         <div className="hm-banner">
-          <img src="/flavours-banner.JPG" alt="Valmiki Foods makhana flavours" className="hm-banner-img" />
+          <img src="/flavours-banner.png" alt="Valmiki Foods makhana flavours" className="hm-banner-img" />
           <div className="hm-banner-overlay">
             <div className="hm-banner-eyebrow">6 Bold Flavours</div>
             <div className="hm-banner-title">Pure Nutrition<br/>In Every Puff.</div>
@@ -223,7 +223,7 @@ export default function Home() {
 
         {/* Dry fruits banner */}
         <div className="hm-banner" style={{ marginBottom: '2.5rem' }}>
-          <img src="/dryfruits-banner.jpg" alt="Premium dry fruits" className="hm-banner-img" style={{ objectPosition: 'center 40%' }} />
+          <img src="/dryfruits-banner.png" alt="Premium dry fruits" className="hm-banner-img" style={{ objectPosition: 'center 40%' }} />
           <div className="hm-banner-overlay">
             <div className="hm-banner-eyebrow">Almonds · Cashews · Walnuts · Dates & More</div>
             <div className="hm-banner-title">The Finest<br/>Curated Dry Fruits.</div>
