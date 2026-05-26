@@ -10,7 +10,7 @@ export default function Footer() {
     }}>
       <div style={{
         maxWidth: '1200px', margin: '0 auto',
-        display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr',
+        display: 'grid', gridTemplateColumns: '2fr 1fr 1fr',
         gap: '3rem', marginBottom: '3rem',
       }} className="ft-grid">
         {/* Brand */}
@@ -50,7 +50,7 @@ export default function Footer() {
         {[
           { title: 'Shop', links: [['All Flavours','/shop'],['New Arrivals','/shop'],['Bulk Orders','/bulk'],['Track Order','/track']] },
           { title: 'Company', links: [['Our Story','/about'],['Quality Promise','/about'],['Sustainability','/about'],['Contact Us','/about']] },
-          { title: 'Support', links: [['FAQs','/about'],['Return Policy','/about'],['Shipping Info','/about'],['Admin Panel','/admin']] },
+          { title: 'Support', links: [['FAQs','/about'],['Terms & Conditions','/terms'],['Privacy Policy','/privacy'],['Return & Refund','/returns'],['Shipping Policy','/shipping'],['Admin Panel','/admin']] },
         ].map(col => (
           <div key={col.title}>
             <div style={{

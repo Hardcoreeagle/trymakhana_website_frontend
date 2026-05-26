@@ -211,72 +211,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── DRY FRUITS ──────────────────────────────────────────── */}
-      <section style={{ padding: '5rem 4rem', maxWidth: '1200px', margin: '0 auto', borderTop: '1px solid rgba(201,168,76,0.15)' }} className="reveal">
-        <div className="section-eyebrow" style={{ marginBottom: '0.7rem' }}>Premium Dry Fruits</div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
-          <h2 className="section-title">Nature's Finest Selection</h2>
-          <Link to="/shop" style={{ fontSize: '0.85rem', color: 'var(--gold)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-            View all <ArrowRight size={13} />
-          </Link>
-        </div>
-
-        {/* Dry fruits banner */}
-        <div className="hm-banner" style={{ marginBottom: '2.5rem' }}>
-          <img src="/dryfruits-banner.png" alt="Premium dry fruits" className="hm-banner-img" style={{ objectPosition: 'center 40%' }} />
-          <div className="hm-banner-overlay">
-            <div className="hm-banner-eyebrow">Almonds · Cashews · Walnuts · Dates & More</div>
-            <div className="hm-banner-title">The Finest<br/>Curated Dry Fruits.</div>
-            <Link to="/shop" className="hm-banner-btn">Explore Dry Fruits →</Link>
-          </div>
-        </div>
-
-        {/* Grid — shows products if added, else placeholder cards */}
-        {loading ? (
-          <div className="hm-cat-grid">
-            {Array(3).fill(0).map((_, i) => (
-              <div key={i} className="hm-skeleton" style={{ animationDelay: `${i * 0.1}s`, height: '340px' }} />
-            ))}
-          </div>
-        ) : products.filter(p => p.flavour && !p.flavour.toLowerCase().includes('flavoured') && p.flavour !== 'Plain').length === 0 ? (
-          /* Placeholder cards — shown until client adds dry fruit products */
-          <div className="hm-cat-grid">
-            {['Almonds', 'Cashews', 'Walnuts'].map((name, i) => (
-              <div key={name} style={{
-                background: 'var(--cream)', borderRadius: '14px',
-                overflow: 'hidden', border: '1.5px dashed rgba(201,168,76,0.3)',
-              }}>
-                <div style={{ height: '200px', background: ['#f5ecd8','#fef9e7','#fff0e0'][i], display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span style={{ fontFamily: "'Playfair Display',serif", fontSize: '3rem', fontWeight: 900, color: 'var(--brown-deep)', opacity: 0.15 }}>{name[0]}</span>
-                </div>
-                <div style={{ padding: '1rem 1.1rem' }}>
-                  <div style={{ fontSize: '10px', color: 'var(--gold)', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '4px' }}>Coming Soon</div>
-                  <div style={{ fontFamily: "'Playfair Display',serif", fontSize: '1rem', fontWeight: 700, color: 'var(--brown-deep)', marginBottom: '5px' }}>{name}</div>
-                  <div style={{ fontSize: '12px', color: 'var(--muted)' }}>Premium quality, sourced fresh.</div>
-                  <div style={{ marginTop: '0.9rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--muted)', fontStyle: 'italic' }}>Available soon</span>
-                    <Link to="/shop" style={{ fontSize: '11px', color: 'var(--gold)', fontWeight: 600 }}>View Shop →</Link>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="hm-cat-grid">
-            {products
-              .filter(p => p.flavour && !p.flavour.toLowerCase().includes('flavoured') && p.flavour !== 'Plain')
-              .slice(0, 6)
-              .map((p, i) => <ProductCard key={p.id} product={p} index={i} />)
-            }
-          </div>
-        )}
-
-        {products.filter(p => p.flavour && !p.flavour.toLowerCase().includes('flavoured') && p.flavour !== 'Plain').length > 0 && (
-          <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
-            <Link to="/shop" className="btn btn-outline">View All Dry Fruits <ArrowRight size={15} /></Link>
-          </div>
-        )}
-      </section>
+      {/* Dry Fruits section removed per request */}
 
       {/* ── BENEFITS ────────────────────────────────────────────── */}
       <section style={{
