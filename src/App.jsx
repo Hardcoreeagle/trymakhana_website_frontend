@@ -17,6 +17,10 @@ import Track from './pages/Track'
 import ProductDetail from './pages/ProductDetail'
 import Bulk from './pages/Bulk'
 import AdminAnalytics from './pages/AdminAnalytics'
+import Terms from './pages/Terms'
+import Privacy from './pages/Privacy'
+import ReturnRefund from './pages/ReturnRefund'
+import Shipping from './pages/Shipping'
 import useAuthStore from './store/authStore'
 
 export default function App() {
@@ -56,6 +60,10 @@ export default function App() {
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="/checkout"   element={<Checkout />} />
               <Route path="/track"      element={<Track />} />
+              <Route path="/terms"      element={<Terms />} />
+              <Route path="/privacy"    element={<Privacy />} />
+              <Route path="/returns"    element={<ReturnRefund />} />
+              <Route path="/shipping"   element={<Shipping />} />
               <Route path="/about"      element={<PlaceholderPage title="Our Story"   emoji="🌾" />} />
               <Route path="/bulk"       element={<Bulk />} />
             </Routes>

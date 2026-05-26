@@ -6,7 +6,8 @@
 // ─────────────────────────────────────────────────────────────────────────
 import { auth } from '../firebase/config'
 
-const BASE = import.meta.env.VITE_API_URL || 'http://localhost:4000'
+const rawBase = import.meta.env.VITE_API_URL || 'http://localhost:4000'
+const BASE = rawBase.replace(/\/$/, '')
 
 // Gets the current user's Firebase ID token for authenticated requests
 async function getAuthHeader() {
