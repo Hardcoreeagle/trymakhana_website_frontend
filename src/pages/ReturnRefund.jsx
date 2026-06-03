@@ -6,7 +6,7 @@ export default function ReturnRefund() {
     <PolicyPage
       title="Return and Refund Policy"
       subtitle="Because our products are food items, we follow a careful return and refund process focused on safety, freshness, and fair resolution of genuine issues."
-      lastUpdated="May 26, 2026"
+      lastUpdated="June 3, 2026"
       sections={[
         {
           title: 'Return eligibility',
@@ -20,6 +20,9 @@ export default function ReturnRefund() {
           paragraphs: [
             'Once we verify a valid issue, we may offer a replacement, store credit, or refund depending on the situation and product availability.',
             'Refunds, when approved, are issued to the original payment method whenever possible. Processing times may vary by bank or payment provider.',
+            'We offer 2 days return if the product is damaged or defective.',
+            'We may offer store credit that will be issued to you within 2 days of receiving returned item and it will be valid till 60 days from the date of issue.',
+            'Approved refund will be processed and credited to your original payment method within 5-7 Business days.',
           ],
         },
         {
