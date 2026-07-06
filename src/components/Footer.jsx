@@ -31,7 +31,7 @@ export default function Footer() {
             <img src="/valmiki-logo.png" alt="Valmiki Foods" style={{ height: '32px', width: 'auto', objectFit: 'contain' }} />
           </div>
           <p style={{ fontSize: '0.85rem', lineHeight: 1.8, maxWidth: '240px', marginBottom: '1.5rem' }}>
-            Premium fox nuts hand-harvested from the sacred ponds of Bihar, delivered fresh to your door.
+            Premium makhana and dry fruits, sourced fresh and delivered straight to your door.
           </p>
           <div style={{ display: 'flex', gap: '0.7rem' }}>
             {['f', 'ig', 'yt'].map(s => (

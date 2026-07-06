@@ -4,23 +4,21 @@
 // Set VITE_API_URL in a .env file in the frontend root:
 //   VITE_API_URL=http://localhost:4000
 // ─────────────────────────────────────────────────────────────────────────
-import { auth } from '../firebase/config'
-
 const rawBase = import.meta.env.VITE_API_URL || 'http://localhost:4000'
 const BASE = rawBase.replace(/\/$/, '')
 
-// Gets the current user's Firebase ID token for authenticated requests
-async function getAuthHeader() {
-  const user = auth.currentUser
-  if (!user) return {}
-  const token = await user.getIdToken()
+// Gets JWT token from localStorage for authenticated requests
+export async function getAuthHeader() {
+  const token = localStorage.getItem('admin_token')
+  if (!token) return {}
   return { Authorization: `Bearer ${token}` }
 }
 
 async function request(path, options = {}) {
+  const { headers: extraHeaders, ...rest } = options
   const res = await fetch(`${BASE}${path}`, {
-    headers: { 'Content-Type': 'application/json', ...options.headers },
-    ...options,
+    headers: { 'Content-Type': 'application/json', ...(extraHeaders || {}) },
+    ...rest,
   })
   const data = await res.json()
   if (!res.ok) throw new Error(data.error || 'Request failed')

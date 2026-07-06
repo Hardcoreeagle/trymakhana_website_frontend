@@ -76,71 +76,42 @@ function TA({ label, field, placeholder, rows = 3, form, errors, onChange }) {
   )
 }
 
-// ── Compress image to max 800px wide, ~150KB base64 ──────────────────────
-function compressImage(file, maxWidth = 800, quality = 0.75) {
-  return new Promise((resolve) => {
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      const img = new Image()
-      img.onload = () => {
-        const canvas = document.createElement('canvas')
-        let w = img.width, h = img.height
-        if (w > maxWidth) { h = Math.round(h * maxWidth / w); w = maxWidth }
-        canvas.width = w; canvas.height = h
-        const ctx = canvas.getContext('2d')
-        ctx.drawImage(img, 0, 0, w, h)
-        resolve(canvas.toDataURL('image/jpeg', quality))
-      }
-      img.src = e.target.result
-    }
-    reader.readAsDataURL(file)
-  })
-}
-
-// ── Image uploader ────────────────────────────────────────────────────────
+// ── Image uploader — URL only (base64 not supported in MySQL) ────────────
 function ImageUploader({ images = [], onChange }) {
-  const [urlInput, setUrlInput]   = useState('')
-  const [uploading, setUploading] = useState(false)
+  const [urlInput, setUrlInput] = useState('')
+  const [error, setError]       = useState('')
 
-  const handleFileUpload = async (e) => {
-    const files = Array.from(e.target.files)
-    if (!files.length) return
-    setUploading(true)
-    try {
-      const compressed = await Promise.all(files.map(f => compressImage(f)))
-      onChange([...images, ...compressed])
-    } catch (err) {
-      alert('Image upload failed: ' + err.message)
-    } finally {
-      setUploading(false)
-      e.target.value = ''
-    }
-  }
+  // Filter out any leftover base64 images
+  const urlImages = images.filter(src => src && !src.startsWith('data:'))
 
   const handleUrlAdd = () => {
     const url = urlInput.trim()
     if (!url) return
-    onChange([...images, url])
+    if (!url.startsWith('http')) { setError('Please enter a valid image URL starting with http'); return }
+    onChange([...urlImages, url])
     setUrlInput('')
+    setError('')
   }
 
   const removeImage = (idx) => {
-    onChange(images.filter((_, i) => i !== idx))
+    onChange(urlImages.filter((_, i) => i !== idx))
   }
 
   return (
     <div style={{ gridColumn: 'span 2' }}>
       <label className="ap-label">
         Product Images
-        <span className="ap-hint-text"> (first image shown on card · images auto-compressed)</span>
+        <span className="ap-hint-text"> (paste image URLs — upload to imgbb.com to get a URL)</span>
       </label>
 
+      {error && <div style={{ color: '#dc2626', fontSize: '0.78rem', marginBottom: '0.4rem' }}>{error}</div>}
+
       {/* Previews */}
-      {images.length > 0 && (
+      {urlImages.length > 0 && (
         <div className="ap-img-previews">
-          {images.map((src, i) => (
+          {urlImages.map((src, i) => (
             <div key={i} className="ap-img-preview">
-              <img src={src} alt={`Product ${i + 1}`} />
+              <img src={src} alt={`Product ${i + 1}`} onError={e => e.target.style.opacity = '0.3'} />
               <button type="button" className="ap-img-remove" onClick={() => removeImage(i)} title="Remove">
                 <XCircle size={16} />
               </button>
@@ -151,22 +122,12 @@ function ImageUploader({ images = [], onChange }) {
       )}
 
       <div className="ap-img-actions">
-        <label className={`ap-upload-btn ${uploading ? 'ap-upload-btn--loading' : ''}`}>
-          <ImagePlus size={15} />
-          {uploading ? 'Compressing…' : 'Upload from device'}
-          <input
-            type="file" accept="image/*" multiple
-            style={{ display: 'none' }}
-            onChange={handleFileUpload}
-            disabled={uploading}
-          />
-        </label>
-        <div className="ap-url-row">
+        <div className="ap-url-row" style={{ flex: 1 }}>
           <input
             className="ap-input"
-            placeholder="Or paste image URL…"
+            placeholder="Paste image URL (e.g. https://i.ibb.co/...)"
             value={urlInput}
-            onChange={e => setUrlInput(e.target.value)}
+            onChange={e => { setUrlInput(e.target.value); setError('') }}
             onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); handleUrlAdd() } }}
             style={{ flex: 1 }}
           />
@@ -206,7 +167,8 @@ function ProductForm({ initial, onSave, onCancel }) {
       ...form,
       price:      +form.price,
       stock:      +form.stock,
-      images:     form.images || [],
+      // Strip any base64 images — only keep URL strings
+      images:     (form.images || []).filter(img => img && typeof img === 'string' && !img.startsWith('data:')),
       benefits:   typeof form.benefits === 'string'
                     ? form.benefits.split(',').map(s => s.trim()).filter(Boolean)
                     : (form.benefits || []),
@@ -386,15 +348,11 @@ export default function AdminProducts() {
 
   const handleSave = async (payload) => {
     try {
-      const saved = await saveProductToFirestore(payload)
-      if (payload.id) {
-        setProducts(prev => prev.map(p => p.id === payload.id ? { ...p, ...payload } : p))
-        showToast('Product updated successfully')
-      } else {
-        setProducts(prev => [...prev, { ...payload, id: saved.id }])
-        showToast('Product added successfully')
-      }
+      console.log('Saving payload:', JSON.stringify(payload, null, 2))
+      await saveProductToFirestore(payload)
+      showToast(payload.id ? 'Product updated successfully' : 'Product added successfully')
       setEditing(null)
+      await load() // reload fresh from backend
     } catch (e) {
       console.error('Save error:', e)
       showToast(`Failed to save: ${e.message}`, 'error')
@@ -602,7 +560,7 @@ export default function AdminProducts() {
         .ap-toast--error   { background:#fee2e2; color:#991b1b; border:1px solid #fca5a5; }
         @keyframes ap-slide-in { from{opacity:0;transform:translateX(20px)} to{opacity:1;transform:translateX(0)} }
 
-        .ap-loading       { text-align:center; padding:4rem; color:var(--muted); }
+        .ap-loading       { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:60vh; color:var(--muted); }
         .ap-loading-emoji { font-size:2rem; margin-bottom:0.8rem; animation:ap-bounce 1s ease infinite; }
         .ap-empty         { text-align:center; padding:4rem; background:white; border-radius:var(--radius-md); color:var(--muted); }
         @keyframes ap-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }

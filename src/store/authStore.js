@@ -12,6 +12,9 @@ const useAuthStore = create((set) => ({
     })
     return unsubscribe
   },
+
+  // Call this after login to immediately update store
+  setUser: (user) => set({ user, loading: false }),
 }))
 
 export default useAuthStore
