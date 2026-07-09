@@ -6,7 +6,6 @@ import useCartStore from '../store/cartStore'
 
 const LINKS = [
   { to: '/shop',  label: 'Shop' },
-  { to: '/about', label: 'Our Story' },
   { to: '/bulk',  label: 'Bulk Orders' },
   { to: '/track', label: 'Track Order' },
 ]

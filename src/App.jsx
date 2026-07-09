@@ -1,6 +1,6 @@
 // src/App.jsx
 import { useEffect } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import CartSidebar from './components/CartSidebar'
 import MakhanaParticles from './components/MakhanaParticles'
@@ -64,7 +64,7 @@ export default function App() {
               <Route path="/privacy"    element={<Privacy />} />
               <Route path="/returns"    element={<ReturnRefund />} />
               <Route path="/shipping"   element={<Shipping />} />
-              <Route path="/about"      element={<PlaceholderPage title="Our Story"   emoji="🌾" />} />
+              <Route path="/about"      element={<Navigate to="/" replace />} />
               <Route path="/bulk"       element={<Bulk />} />
             </Routes>
             <Footer />

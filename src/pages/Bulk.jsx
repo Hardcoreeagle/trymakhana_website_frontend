@@ -12,7 +12,7 @@ const TIERS = [
 
 const BENEFITS = [
   { icon: <Package size={22} />,  title: 'Custom Packaging',   desc: 'Branded packaging available for corporate gifting and retail.' },
-  { icon: <Truck size={22} />,    title: 'Pan-India Delivery',  desc: 'We deliver bulk orders across India with tracked shipping.' },
+  { icon: <Truck size={22} />,    title: 'Pan-India Delivery',  desc: 'We deliver bulk orders across India within 5–7 business days with full tracking.' },
   { icon: <CheckCircle size={22} />, title: 'Quality Guaranteed', desc: 'Same premium quality as retail — freshness guaranteed.' },
   { icon: <Phone size={22} />,    title: 'Dedicated Support',  desc: 'A dedicated account manager for all your bulk requirements.' },
 ]

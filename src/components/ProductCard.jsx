@@ -61,7 +61,7 @@ export default function ProductCard({ product, index = 0 }) {
         ) : (
           <div className="pc-noimg">{(product.name || 'P')[0]}</div>
         )}
-        {product.tag && <div className="pc-tag">{product.tag}</div>}
+        {product.tag && product.flavour?.toLowerCase().includes('flavoured') && <div className="pc-tag">{product.tag}</div>}
         {product.stock === 0 && <div className="pc-oos">Out of Stock</div>}
         {product.stock > 0 && product.stock < 20 && (
           <div className="pc-low">Only {product.stock} left!</div>
@@ -70,7 +70,7 @@ export default function ProductCard({ product, index = 0 }) {
 
       {/* Body */}
       <div className="pc-body">
-        {product.flavour && <div className="pc-flavour">{product.flavour}</div>}
+        {product.flavour && product.flavour.toLowerCase().includes('flavoured') && <div className="pc-flavour">{product.flavour}</div>}
         <div className="pc-name">{product.name || 'Unnamed Product'}</div>
         {product.description && <p className="pc-desc">{product.description}</p>}
 

@@ -141,6 +141,21 @@ function OrderCard({ order }) {
               </div>
             )}
           </div>
+
+          {/* Delivery timeline note */}
+          {order.status !== 'delivered' && order.status !== 'cancelled' && (
+            <div style={{
+              marginTop: '1rem', padding: '0.8rem 1rem',
+              background: 'rgba(201,168,76,0.08)',
+              border: '1px solid rgba(201,168,76,0.2)',
+              borderRadius: 'var(--radius-sm)',
+              fontSize: '0.82rem', color: 'var(--brown)',
+              display: 'flex', alignItems: 'center', gap: '0.5rem',
+            }}>
+              🚚 Orders are delivered within <strong style={{ marginLeft: '3px' }}>5–7 business days</strong> after dispatch.
+            </div>
+          )}
+
           {order.courierTrackingNo && (
             <div style={{
               marginTop: '1rem', padding: '0.8rem 1rem',

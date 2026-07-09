@@ -50,7 +50,7 @@ function ShopCard({ product, index, onClick }) {
         ) : (
           <div className="sc-noimg">{(product.name || 'M')[0]}</div>
         )}
-        {product.tag && <div className="sc-tag">{product.tag}</div>}
+        {product.tag && product.flavour?.toLowerCase().includes('flavoured') && <div className="sc-tag">{product.tag}</div>}
         {product.stock === 0 && <div className="sc-oos">Out of Stock</div>}
         {product.stock > 0 && product.stock < 20 && (
           <div className="sc-low">Only {product.stock} left!</div>
@@ -59,7 +59,7 @@ function ShopCard({ product, index, onClick }) {
 
       {/* Body */}
       <div className="sc-body">
-        {product.flavour && <div className="sc-flavour">{product.flavour}</div>}
+        {product.flavour && product.flavour.toLowerCase().includes('flavoured') && <div className="sc-flavour">{product.flavour}</div>}
         <div className="sc-name">{product.name || 'Unnamed Product'}</div>
         {product.description && <p className="sc-desc">{product.description}</p>}
         <div className="sc-foot">

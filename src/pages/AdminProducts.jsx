@@ -391,7 +391,7 @@ export default function AdminProducts() {
           <div className="ap-eyebrow">Catalogue</div>
           <h1 className="ap-title">Products</h1>
         </div>
-        <button className="ap-add-btn" onClick={() => setEditing({ ...EMPTY_PRODUCT })}>
+        <button className="ap-add-btn" onClick={() => { setEditing(null); setTimeout(() => setEditing({ ...EMPTY_PRODUCT }), 0) }}>
           <Plus size={16} /> Add Product
         </button>
       </div>
@@ -424,6 +424,7 @@ export default function AdminProducts() {
         {/* Form */}
         {editing && (
           <ProductForm
+            key={editing.id || 'new'}
             initial={editing}
             onSave={handleSave}
             onCancel={() => setEditing(null)}
@@ -440,7 +441,7 @@ export default function AdminProducts() {
           <div className="ap-empty">
             <img src="/makhana-icon.png" alt="" style={{ width:"44px",height:"44px",objectFit:"contain",marginBottom:"0.8rem",opacity:0.5,mixBlendMode:"multiply" }} />
             <p style={{ marginBottom: '1rem' }}>No products yet.</p>
-            <button className="ap-add-btn" onClick={() => setEditing({ ...EMPTY_PRODUCT })}>
+            <button className="ap-add-btn" onClick={() => { setEditing(null); setTimeout(() => setEditing({ ...EMPTY_PRODUCT }), 0) }}>
               <Plus size={15} /> Add your first product
             </button>
           </div>

@@ -39,7 +39,7 @@ const FEATURES = [
   {
     icon: "📦",
     title: "Pan-India Delivery",
-    desc: "Fast shipping across India in 2–4 days with real-time order tracking on your phone.",
+    desc: "All orders delivered within 5–7 business days across India, with real-time order tracking on your phone.",
   },
 ];
 
@@ -376,9 +376,7 @@ export default function Home() {
             {products
               .filter(
                 (p) =>
-                  (p.flavour &&
-                    p.flavour.toLowerCase().includes("flavoured")) ||
-                  p.flavour === "Plain",
+                  p.flavour && p.flavour.toLowerCase().includes("flavoured"),
               )
               .slice(0, 6)
               .map((p, i) => (
@@ -386,12 +384,6 @@ export default function Home() {
               ))}
           </div>
         )}
-
-        <div style={{ textAlign: "center", marginTop: "2.5rem" }}>
-          <Link to="/shop" className="btn btn-outline">
-            View All Makhana Flavours <ArrowRight size={15} />
-          </Link>
-        </div>
       </section>
 
       {/* ── DRY FRUITS CATALOGUE ─────────────────────────────────── */}
@@ -470,82 +462,38 @@ export default function Home() {
               ))}
           </div>
         ) : products.filter(
-            (p) =>
-              p.flavour &&
-              !p.flavour.toLowerCase().includes("flavoured") &&
-              p.flavour !== "Plain",
+            (p) => p.flavour && !p.flavour.toLowerCase().includes("flavoured"),
           ).length === 0 ? (
-          <div className="hm-cat-grid">
-            {["Almonds", "Cashews", "Walnuts"].map((name, i) => (
-              <div
-                key={name}
-                style={{
-                  background: "var(--cream)",
-                  borderRadius: "14px",
-                  overflow: "hidden",
-                  border: "1.5px dashed rgba(201,168,76,0.3)",
-                }}
-              >
-                <div
-                  style={{
-                    height: "200px",
-                    background: ["#f5ecd8", "#fef9e7", "#fff0e0"][i],
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "'Playfair Display',serif",
-                      fontSize: "3rem",
-                      fontWeight: 900,
-                      color: "var(--brown-deep)",
-                      opacity: 0.15,
-                    }}
-                  >
-                    {name[0]}
-                  </span>
-                </div>
-                <div style={{ padding: "1rem 1.1rem" }}>
-                  <div
-                    style={{
-                      fontSize: "10px",
-                      color: "var(--gold)",
-                      fontWeight: 700,
-                      letterSpacing: "0.12em",
-                      textTransform: "uppercase",
-                      marginBottom: "4px",
-                    }}
-                  >
-                    Coming Soon
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "'Playfair Display',serif",
-                      fontSize: "1rem",
-                      fontWeight: 700,
-                      color: "var(--brown-deep)",
-                      marginBottom: "5px",
-                    }}
-                  >
-                    {name}
-                  </div>
-                  <div style={{ fontSize: "12px", color: "var(--muted)" }}>
-                    Premium quality, sourced fresh.
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div
+            style={{
+              textAlign: "center",
+              padding: "3rem",
+              background: "var(--cream)",
+              borderRadius: "var(--radius-md)",
+              border: "1.5px dashed rgba(201,168,76,0.3)",
+            }}
+          >
+            <div style={{ fontSize: "2rem", marginBottom: "0.8rem" }}>🌰</div>
+            <div
+              style={{
+                fontFamily: "'Playfair Display',serif",
+                fontWeight: 700,
+                color: "var(--brown-deep)",
+                marginBottom: "0.4rem",
+              }}
+            >
+              Dry Fruits Coming Soon
+            </div>
+            <p style={{ fontSize: "0.85rem", color: "var(--muted)" }}>
+              Our premium dry fruits range is being curated. Check back soon!
+            </p>
           </div>
         ) : (
           <div className="hm-cat-grid">
             {products
               .filter(
                 (p) =>
-                  p.flavour &&
-                  !p.flavour.toLowerCase().includes("flavoured") &&
-                  p.flavour !== "Plain",
+                  p.flavour && !p.flavour.toLowerCase().includes("flavoured"),
               )
               .slice(0, 6)
               .map((p, i) => (
@@ -584,7 +532,7 @@ export default function Home() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
+              gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
               gap: "1rem",
             }}
           >
@@ -688,7 +636,7 @@ export default function Home() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
+              gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
               gap: "1.5rem",
             }}
           >
@@ -836,14 +784,19 @@ export default function Home() {
 
         /* Responsive */
         @media(max-width:768px) {
-          section[style] { padding-left:1.5rem !important; padding-right:1.5rem !important; }
-          div[style*="padding: '8rem 4rem'"] { padding:7rem 1.5rem 3rem !important; }
-          .hm-banner { height:200px; }
-          .hm-banner-overlay { padding:1.5rem; }
-          .hm-cat-grid { grid-template-columns:repeat(2,1fr); gap:1rem; }
+          section { padding-left:1.2rem !important; padding-right:1.2rem !important; padding-top:3rem !important; padding-bottom:3rem !important; }
+          .hm-banner { height:220px; border-radius:12px; }
+          .hm-banner-overlay { padding:1.2rem 1.5rem; }
+          .hm-banner-title { font-size:1.4rem !important; }
+          .hm-banner-eyebrow { font-size:10px; }
+          .hm-cat-grid { grid-template-columns:repeat(2,1fr); gap:0.8rem; }
+          .hm-features-grid { grid-template-columns:1fr 1fr !important; }
+          .hm-testimonials-grid { grid-template-columns:1fr !important; }
         }
         @media(max-width:480px) {
           .hm-cat-grid { grid-template-columns:1fr; }
+          .hm-banner { height:180px; }
+          .hm-features-grid { grid-template-columns:1fr !important; }
         }
       `}</style>
     </div>

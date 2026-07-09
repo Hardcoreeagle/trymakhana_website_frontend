@@ -110,6 +110,9 @@ export default function Checkout() {
             <div style={{ fontFamily: 'monospace', fontWeight: 700, color: 'var(--brown-deep)', fontSize: '0.88rem', wordBreak: 'break-all' }}>#{orderId}</div>
             <div style={{ fontSize: '0.72rem', color: 'var(--muted)', marginTop: '0.35rem' }}>Save this to track your order</div>
           </div>
+          <div style={{ background: 'rgba(201,168,76,0.1)', borderRadius: 'var(--radius-sm)', padding: '0.8rem 1rem', marginBottom: '1.2rem', fontSize: '0.82rem', color: 'var(--brown)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            🚚 Your order will be delivered within <strong style={{ marginLeft: '3px' }}>5–7 business days</strong>.
+          </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
             <button className="btn btn-primary" style={{ justifyContent: 'center', padding: '0.85rem' }} onClick={() => navigate('/track')}>
               Track My Order →
@@ -153,6 +156,9 @@ export default function Checkout() {
             </div>
             <div className="co-cod-note">
               💳 <strong>Cash on Delivery</strong> available · UPI &amp; card payment at the door
+              <div style={{ marginTop: '0.5rem', paddingTop: '0.5rem', borderTop: '1px solid rgba(90,50,20,0.15)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                🚚 <span>All orders delivered within <strong>5–7 business days</strong> after dispatch.</span>
+              </div>
             </div>
           </div>
 
@@ -251,10 +257,14 @@ export default function Checkout() {
         .co-success-email { font-size:0.85rem; color:var(--muted); margin-bottom:1.5rem; }
         .co-empty-title   { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--brown-deep); }
         @media (max-width:768px) {
-          .co-layout  { grid-template-columns:1fr; }
-          .co-summary { position:static; }
-          .co-container { padding:0 1.2rem; }
-          .co-heading { font-size:1.6rem; }
+          .co-layout    { grid-template-columns:1fr; }
+          .co-summary   { position:static; }
+          .co-container { padding:0 1rem; }
+          .co-heading   { font-size:1.4rem; margin-bottom:1.5rem; }
+          .co-page      { padding-top:5rem; padding-bottom:2rem; }
+          .co-grid      { grid-template-columns:1fr; }
+          .co-card      { padding:1.2rem; }
+          .co-input     { font-size:16px; }
         }
       `}</style>
     </div>
