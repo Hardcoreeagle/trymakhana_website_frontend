@@ -18,7 +18,7 @@ export default function Shipping() {
         {
           title: 'Delivery timeline',
           paragraphs: [
-            'Delivery time depends on your location and the carrier service used. Most orders are delivered within the standard courier timeline after dispatch.',
+            'ALL Order will be delivered within 5-7 Business days.',
             'While we do our best to meet expected timelines, actual delivery may vary due to weather, courier delays, or regional restrictions.',
           ],
         },
