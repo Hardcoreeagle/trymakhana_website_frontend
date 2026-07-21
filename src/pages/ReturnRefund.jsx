@@ -22,7 +22,8 @@ export default function ReturnRefund() {
             'Refunds, when approved, are issued to the original payment method whenever possible. Processing times may vary by bank or payment provider.',
             'We offer 2 days return if the product is damaged or defective.',
             'We may offer store credit that will be issued to you within 2 days of receiving returned item and it will be valid till 60 days from the date of issue.',
-            'Approved refund/Replacement will be processed and credited to your original payment method within 5-7 Business days.',
+            'Approved refund will be processed and credited to your original payment method within 5-7 Business days.',
+            'Exchange/Replacement deliveries will be done within 5-7 Business days.'
           ],
         },
         {
